@@ -123,13 +123,6 @@ class Auth extends BaseController
                         'max_length'=>'{field} Maksimal 60 Karakter',
                     ]
                 ],
-                'email'=>[
-                    'label'=>'email',
-                    'rules'=> 'required',
-                    'errors'=>[
-                        'required'=>'{field} Harus di isi',
-                    ]
-                ],
                 'password'=>[
                     'label'=>'password',
                     'rules'=> 'required',
@@ -149,45 +142,29 @@ class Auth extends BaseController
             // jika lolos validasi
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-            $isRole = $this->request->getPost('is_role');
 
-            // === CEK ROLE LOGIN ===
-            if ($isRole==1) {
-                // jika centang chebox admin
-                $user = $this->userM
-                ->where('email', $email)
-                ->where('role','admin')
-                ->first();
-                if (!$user){
-                    return $this->response->setJSON([
-                        'status'=> false,
-                        'email'=> 'Akun admin tidak Terdaftar',
-                        'password'=>''
-                    ]);
-                }
-            }else{
-                // login user /publik
-                $user = $this->userM
-                ->where('email', $email)
-                ->where('role','pelanggan')
-                ->first();
-                if (!$user){
-                    return $this->response->setJSON([
-                        'status'=> false,
-                        'email'=> 'Akun User tidak Terdaftar',
-                        'password'=>''
-                    ]);
-                }
+            // === CEK USER BERDASARKAN EMAIL ===
+            // Cari user tanpa memfilter role terlebih dahulu
+            $user = $this->userM
+            ->where('email', $email)
+            ->first();
+
+            if (!$user){
+                return $this->response->setJSON([
+                    'status'=> false,
+                    'email'=> 'Akun tidak terdaftar',
+                    'password'=>''
+                ]);
             }
 
             // === CEK PASSWORD ===
-            if(Hash::verify($password, $user['password'])) {
+            if(!Hash::verify($password, $user['password'])) {
                 return $this->response->setJSON([
                 'status'=> false,
                 'password'=>'Password Salah',
                 'email'=> '',
-                
-                ]); 
+
+                ]);
             }
 
             //== SET SESSION

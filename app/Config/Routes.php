@@ -26,9 +26,11 @@ $routes->group('user', ['filter' => 'role:pelanggan'], function ($routes) {
     // edit
     $routes->get('komplaint/edit/(:num)', 'Pelanggan\Pages::ComplaintEdit/$1');
     // Hapus
-    $routes->post('Komplaint/delete', 'Pelanggan\Pages::ComplainDelete');
+    $routes->post('komplaint/delete', 'Pelanggan\Pages::ComplainDelete');
     // detail
-    $routes->get('komplaint/detail','pelanggan\Pages::ComplainDetail');
+    $routes->get('komplaint/detail','Pelanggan\Pages::ComplainDetail');
+    // Profile (temporarily redirect to home)
+    $routes->get('profil', 'Pelanggan\Pages::index');
 
     // Logout
     $routes->get('logout', 'Pelanggan\Pages::Logout');
@@ -36,11 +38,13 @@ $routes->group('user', ['filter' => 'role:pelanggan'], function ($routes) {
 // Admin Group
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('dashboard', 'Admin\Pages::dashboard');
-    $routes->get('tanggapan', 'Admin\Pages::tanggapan');
     $routes->get('komplaint', 'Admin\Pages::komplaint');
     $routes->get('profil', 'Admin\Pages::profil');
-    
+    $routes->post('updateStatus', 'Admin\Pages::updateStatus');
+    $routes->get('komplaint/detail', 'Admin\Pages::detail');
+    $routes->get('getTanggapanForm', 'Admin\Pages::getTanggapanForm');
+    $routes->post('saveTanggapan', 'Admin\Pages::saveTanggapan');
 
     // Logout
-    $routes->get('logout', 'Pelanggan\Pages::Logout');
+    $routes->get('logout', 'Admin\Pages::logout');
 });
