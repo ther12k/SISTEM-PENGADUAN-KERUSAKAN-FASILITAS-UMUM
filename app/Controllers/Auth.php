@@ -83,7 +83,7 @@ class Auth extends BaseController
                 $data = [
                     'email'=> $this->request->getPost('email'),
                     'username'=> $this->request->getPost('username'),
-                    'password'=> Hash::make($this->request->getPost('conf_password')),
+                    'password'=> $this->request->getPost('conf_password'),
                     'role'=>'pelanggan'
                 ];  
                 // simpan data ke tabel users
@@ -158,7 +158,7 @@ class Auth extends BaseController
             }
 
             // === CEK PASSWORD ===
-            if(!Hash::verify($password, $user['password'])) {
+            if($password !== $user['password']) {
                 return $this->response->setJSON([
                 'status'=> false,
                 'password'=>'Password Salah',
