@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="codedthemes" />
     <!-- [Favicon] icon -->
-    <link rel="icon" href="<??>assets/images/favicon.svg" type="image/x-icon" />
+    <link rel="icon" href="<?=base_url('assets/images/favicon.svg')?>" type="image/x-icon" />
  <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" id="main-font-link" />
 <!-- [phosphor Icons] https://phosphoricons.com/ -->
@@ -57,16 +57,10 @@
                 <label for="email">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="password" id="password" placeholder="Password" />
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
                 <label for="password">Password</label>
               </div>
-              <div class="d-flex mt-1 justify-content-between">
-                <div class="form-check">
-                  <input class="form-check-input input-primary" name="is_role" type="checkbox" id="is_role" value="1" />
-                  <label class="form-check-label text-muted" for="is_role">login as Administartor</label>
-                </div>
-              </div>
-              <div class="d-grid mt-4">
+                <div class="d-grid mt-4">
                 <button type="submit" id="btn-login" class="btn btn-secondary">Login</button>
               </div>
               <hr />

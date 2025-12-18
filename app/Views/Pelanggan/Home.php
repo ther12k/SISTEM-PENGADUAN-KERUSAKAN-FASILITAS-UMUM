@@ -1,81 +1,89 @@
-<?= $this->extend('Pelanggan\Template') ?>
-      <?= $this->section('content') ?>
-      
+<?= $this->extend('Pelanggan/Template') ?>
+<?= $this->section('content') ?>
 
-      <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-          <div class="page-block">
-            <div class="row align-items-center">
-              <div class="col">
-                <div class="page-header-title">
-                  <h5 class="m-b-10">Selamat Datang, <strong><?=session()->get('username')?></strong></h5>
-                </div>
-              </div>
-              <div class="col-auto">
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="<?=base_url()?>dashboard/index.html">Home</a></li>
-                  <li class="breadcrumb-item"><a href="javascript: void(0)">Other</a></li>
-                  <li class="breadcrumb-item" aria-current="page">Sample Page</li>
-                </ul>
-              </div>
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- Welcome Card -->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Selamat Datang, <?= session()->get('username') ?>!</h5>
             </div>
-          </div>
+            <div class="card-body">
+                <p class="card-text">Selamat datang di Sistem Pengaduan Kerusakan Fasilitas Umum. Anda dapat membuat pengaduan kerusakan fasilitas umum di sini.</p>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card border-primary">
+                            <div class="card-body text-center">
+                                <i class="ti ti-file-description text-primary" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-2">Buat Pengaduan</h5>
+                                <p class="card-text">Buat pengaduan kerusakan fasilitas umum</p>
+                                <a href="<?= base_url('user/komplaint/buat') ?>" class="btn btn-primary">Buat Pengaduan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-info">
+                            <div class="card-body text-center">
+                                <i class="ti ti-list text-info" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-2">Daftar Pengaduan</h5>
+                                <p class="card-text">Lihat daftar pengaduan Anda</p>
+                                <a href="<?= base_url('user/komplaint/list') ?>" class="btn btn-info">Lihat Pengaduan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-success">
+                            <div class="card-body text-center">
+                                <i class="ti ti-user text-success" style="font-size: 3rem;"></i>
+                                <h5 class="card-title mt-2">Profil</h5>
+                                <p class="card-text">Kelola profil Anda</p>
+                                <a href="<?= base_url('user/profil') ?>" class="btn btn-success">Lihat Profil</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- [ breadcrumb ] end -->
-        <div class="row">
-          <div class="col-md-4">
-          <div class="card bg-warning-dark dashnum-card dashnum-card-small text-white overflow-hidden">
-              <span class="round bg-warning small"></span>
-              <span class="round bg-warning big"></span>
-              <div class="card-body p-3">
-                <div class="d-flex align-items-center">
-                  <div class="avtar avtar-lg bg-warning">
-                    <i class="text-dark ti ti-notes"></i>
-                  </div>
-                  <div class="ms-2">
-                    <h4 class="text-dark mb-1"><?=$stat['baru']?> Item</h4>
-                    <p class="mb-0 opacity-75 text-sm text-dark">Jumlah Komplaint Baru</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Proses -->
-          <div class="col-md-4">
-          <div class="card bg-primary-dark dashnum-card dashnum-card-small text-white overflow-hidden">
-              <span class="round bg-primary small"></span>
-              <span class="round bg-primary big"></span>
-              <div class="card-body p-3">
-                <div class="d-flex align-items-center">
-                  <div class="avtar avtar-lg">
-                    <i class="text-white ti ti-notes"></i>
-                  </div>
-                  <div class="ms-2">
-                    <h4 class="text-white mb-1"><?=$stat['proses']?> Item</h4>
-                    <p class="mb-0 opacity-75 text-sm">Jumlah Komplaint Diproses</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Selesai -->
-          <div class="col-md-4">
-          <div class="card bg-success-dark dashnum-card dashnum-card-small text-white overflow-hidden">
-              <span class="round bg-success small"></span>
-              <span class="round bg-success big"></span>
-              <div class="card-body p-3">
-                <div class="d-flex align-items-center">
-                  <div class="avtar avtar-lg bg-success">
-                    <i class="text-dark ti ti-notes"></i>
-                  </div>
-                  <div class="ms-2">
-                    <h4 class="text-dark mb-1"><?=$stat['selesai']?> Item</h4>
-                    <p class="mb-0 opacity-75 text-sm text-dark">Jumlah Komplaint Selesai</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
 
-        <?= $this->endSection() ?>
+    <!-- Statistics Card -->
+    <div class="col-sm-12 mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Statistik Pengaduan Anda</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <h2 class="text-warning"><?= $stats['total'] ?? 0 ?></h2>
+                            <p>Total Pengaduan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <h2 class="text-info"><?= $stats['baru'] ?? 0 ?></h2>
+                            <p>Menunggu Proses</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <h2 class="text-primary"><?= $stats['proses'] ?? 0 ?></h2>
+                            <p>Sedang Diproses</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3">
+                            <h2 class="text-success"><?= $stats['selesai'] ?? 0 ?></h2>
+                            <p>Selesai</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+<?= $this->endSection() ?>

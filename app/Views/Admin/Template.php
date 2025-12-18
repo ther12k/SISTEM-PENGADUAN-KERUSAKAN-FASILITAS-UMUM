@@ -3,7 +3,7 @@
   <!-- [Head] start -->
 
   <head>
-    <title>User | xx</title>
+    <title>Admin | Sistem Pengaduan</title>
     <!-- [Meta] -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
@@ -47,7 +47,7 @@
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
-      <a href="<?=base_url('user/home')?>" class="b-brand text-primary">
+      <a href="<?=base_url('admin/dashboard')?>" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
         <img src="<?=base_url()?>assets/images/logo-app.png" alt="" class="img-fluid" />
       </a>
@@ -59,44 +59,39 @@
           <i class="ti ti-apps"></i>
         </li>
         <li class="pc-item">
-          <a href="<?=base_url('user/home')?>" class="pc-link"
-            ><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span 
+          <a href="<?=base_url('admin/dashboard')?>" class="pc-link"
+            ><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
             class="pc-mtext">Dashboard</span></a
           >
         </li>
 
         <li class="pc-item">
-          <a href="<?=base_url('user/komplaint/buat')?>" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-pencil"></i></span>
-            <span class="pc-mtext">Buat Komplaint</span>
-          </a>
-        
-        <li class="pc-item">
-          <a href="<?=base_url('user/komplaint/list')?>" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-list-search"></i></span>
-            <span class="pc-mtext">Complaint Saya</span>
+          <a href="<?=base_url('admin/komplaint')?>" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-list"></i></span>
+            <span class="pc-mtext">Data Komplaint</span>
           </a>
         </li>
 
+  
         <li class="pc-item pc-caption">
-          <label>User</label>
+          <label>Admin</label>
           <i class="ti ti-news"></i>
         </li>
         <li class="pc-item">
-          <a class="pc-link" href="<?=base_url('user/profil')?>">
+          <a class="pc-link" href="<?=base_url('admin/profil')?>">
             <span class="pc-micon"><i class="ti ti-user"></i></span>
-            <span class="pc-mtext">Profil Saya</span>
+            <span class="pc-mtext">Profil Admin</span>
           </a>
         </li>
         <li class="pc-item">
-          <a href="<?=base_url('user/logout')?>" class="pc-link">
+          <a href="<?=base_url('admin/logout')?>" class="pc-link">
             <span class="pc-micon"><i class="ti ti-logout"></i></span>
             <span class="pc-mtext">Logout</span>
           </a>
         </li>
 
       </ul>
-      
+
     </div>
   </div>
 </nav>
@@ -176,22 +171,9 @@
                 </div>
                 <div class="flex-grow-1 ms-1">
                   <span class="float-end text-muted">3 min ago</span>
-                  <h5>Store Verification Done</h5>
-                  <p class="text-body fs-6">We have successfully received your request.</p>
+                  <h5>New Complaint</h5>
+                  <p class="text-body fs-6">There is a new complaint to respond.</p>
                   <div class="badge rounded-pill bg-light-danger">Unread</div>
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="<?=base_url()?>assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar" />
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">10 min ago</span>
-                  <h5>Joseph William</h5>
-                  <p class="text-body fs-6">It is a long established fact that a reader will be distracted</p>
-                  <div class="badge rounded-pill bg-light-success">Confirmation of Account</div>
                 </div>
               </div>
             </div>
@@ -221,26 +203,16 @@
         <div class="dropdown-header">
           <h4>
             Good Morning,
-            <span class="small text-muted">John Doe</span>
+            <span class="small text-muted"><?=session()->get('username')?></span>
           </h4>
-          <p class="text-muted">Project Admin</p>
+          <p class="text-muted">Administrator</p>
           <hr />
           <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 280px)">
-            <div class="upgradeplan-block bg-light-warning rounded">
-              <h4>Explore full code</h4>
-              <p class="text-muted">Buy now to get full access of code files</p>
-              <a href="https://codedthemes.com/item/berry-bootstrap-5-admin-template/" target="_blank" class="btn btn-warning">Buy Now</a>
-            </div>
-            <hr />
-            <a href="<?=base_url('user/profil')?>" class="dropdown-item">
+            <a href="<?=base_url('admin/profil')?>" class="dropdown-item">
               <i class="ti ti-settings"></i>
               <span>Account Settings</span>
             </a>
-            <a href="<?=base_url('user/profil')?>" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>Profil Saya</span>
-            </a>
-            <a href="<?=base_url('user/logout')?>" class="dropdown-item">
+            <a href="<?=base_url('admin/logout')?>" class="dropdown-item">
               <i class="ti ti-logout"></i>
               <span>Logout</span>
             </a>
@@ -260,7 +232,7 @@
     <div class="pc-container">
       <div class="pc-content">
         <?=$this->renderSection('content');?>
-  
+
         <!-- [ Main Content ] end -->
       </div>
     </div>
@@ -270,15 +242,13 @@
         <div class="row">
           <div class="col-sm-6 my-1">
             <p class="m-0">
-              Berry &#9829; crafted by Team
-              <a href="https://themeforest.net/user/codedthemes" target="_blank">CodedThemes</a>
+              Sistem Pengaduan &#9829; crafted by Team
             </p>
           </div>
           <div class="col-sm-6 ms-auto my-1">
             <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">
-              <li class="list-inline-item"><a href="<?=base_url('user/home')?>">Home</a></li>
-              <li class="list-inline-item"><a href="<?=base_url()?>">About</a></li>
-              <li class="list-inline-item"><a href="<?=base_url('user/komplaint/buat')?>">Buat Pengaduan</a></li>
+              <li class="list-inline-item"><a href="<?=base_url('admin/dashboard')?>">Dashboard</a></li>
+              <li class="list-inline-item"><a href="<?=base_url('admin/komplaint')?>">Komplaint</a></li>
             </ul>
           </div>
         </div>
@@ -288,6 +258,7 @@
 <script src="<?=base_url()?>assets/js/plugins/popper.min.js"></script>
 <script src="<?=base_url()?>assets/js/plugins/simplebar.min.js"></script>
 <script src="<?=base_url()?>assets/js/plugins/bootstrap.min.js"></script>
+<script src="<?=base_url()?>assets/js/icon/custom-font.js"></script>
 <script src="<?=base_url()?>assets/js/script.js"></script>
 <script src="<?=base_url()?>assets/js/theme.js"></script>
 <script src="<?=base_url()?>assets/js/plugins/feather.min.js"></script>

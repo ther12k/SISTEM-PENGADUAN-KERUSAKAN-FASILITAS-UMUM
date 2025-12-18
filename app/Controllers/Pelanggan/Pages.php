@@ -13,10 +13,12 @@ class Pages extends BaseController
     public function index()
     {
         $user_login_id = session()->get('user_id');
-        $data['stat'] =$this->complaintM->countStatusByUser($user_login_id);
+        $data['stats'] =$this->complaintM->countStatusByUser($user_login_id);
+        // Calculate total
+        $data['stats']['total'] = ($data['stats']['baru'] ?? 0) + ($data['stats']['proses'] ?? 0) + ($data['stats']['selesai'] ?? 0);
         // dd($data);
         // dd(session()->get('username'));
-       return view('Pelanggan/Home', $data); 
+       return view('Pelanggan/Home', $data);
     }
 
 
@@ -118,8 +120,8 @@ function ComplaintStore()
                 // created_at hanya untuk insert
                 'created_at'  => $id ? $oldData['created_at'] : date('Y-m-d H:i:s'),
 
-                // updated_at selalu diperbarui
-                'updated_at'  => date('Y-m-d H:i:s'),
+                // update_at selalu diperbarui
+                'update_at'  => date('Y-m-d H:i:s'),
             ]);
 
             $response = [
@@ -157,10 +159,12 @@ function ComplaintStore()
     function ComplainDetail(){
         $id = $this->request->getVar('id');
         $data = $this->complaintM->find($id);
-        return $this->response->setJSON(['form_detail'=> view('Pelanggan/complaints/detail_komplaint',['d'=>$data])]);
 
+        if(!$data) {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan']);
+        }
 
-        echo json_encode($_GET);
+        return $this->response->setJSON(['form_detail'=> view('Pelanggan/Complaints/detail_komplaint',['d'=>$data])]);
     }
     // logout
 
